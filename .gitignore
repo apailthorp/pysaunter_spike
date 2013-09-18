@@ -38,6 +38,7 @@ nosetests.xml
 .idea
 env
 
+log*
 *.log
 *.pot
 *.pyc
