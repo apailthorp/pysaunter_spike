@@ -2,14 +2,7 @@ __author__ = 'apailthorp'
 
 from saunter.po.webdriver.page import Page
 from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
-
-locators = {
-    'idle': 'css=.idle',
-    'username': "css=input[name='username']",
-    'password': 'css=input[name="password"]',
-    'submit': 'css=input[name="submit"]',
-    'gear': 'css=.has-settings .settings-menu .label',
-}
+from locators import locators
 
 class LoginPage(Page):
 

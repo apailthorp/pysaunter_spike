@@ -3,11 +3,7 @@ __author__ = 'apailthorp'
 import time
 from saunter.po.webdriver.page import Page
 from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
-
-locators = {
-    'idle': 'css=.idle',
-    'gear': 'css=.has-settings .settings-menu .label',
-}
+from locators import locators
 
 class DesktopPage(Page):
 
