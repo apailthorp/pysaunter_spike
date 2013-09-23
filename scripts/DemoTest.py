@@ -4,6 +4,7 @@ from saunter.testcase.webdriver import SaunterTestCase
 import pytest
 from pages.login import LoginPage
 from pages.desktop import DesktopPage
+from pages.clipcard import ClipCard
 
 class CheckLoginExample(SaunterTestCase):
     # def setup_method(self, method):
@@ -21,7 +22,36 @@ class CheckLoginExample(SaunterTestCase):
 
         self.desktop = DesktopPage(self.driver).wait_until_idle()
 
-        assert(self.desktop.open_close_gear())
+        # assert(self.desktop.open_close_gear())
+
+        clipCardTitles = self.desktop.getClipCardTitles()
+        print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
+        clipCardTitles = self.desktop.getClipCardTitles()
+        print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
+        clipCardTitles = self.desktop.getClipCardTitles()
+        print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
+        clipCardTitles = self.desktop.getClipCardTitles()
+        print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+        print 'Some ClipCard titles'
+        clipCardTitles = self.desktop.getClipCardTitles()
+        i = 0
+        for someClipCardTitle in clipCardTitles:
+            i += 1
+            print "%s: %s" % (i, someClipCardTitle.text)
+            #assert(self.desktop.clickClipCardTitle(someClipCardTitle.text))
 
         print 'zoom out as far as we can'
         while (self.desktop.zoom_enabled('out')):
@@ -34,15 +64,23 @@ class CheckLoginExample(SaunterTestCase):
         while (self.desktop.zoom_enabled('in')):
             self.desktop.zoom('in')
 
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
         print 'assert zoom out available'
         assert(self.desktop.zoom_enabled('out'))
 
         print 'reset the search'
         assert(self.desktop.resetSearch())
 
-        print 'Some ClipCard titles'
+        print 'Some ClipCard titles after search reset'
         clipCardTitles = self.desktop.getClipCardTitles()
+        i = 0
         for someClipCardTitle in clipCardTitles:
-            print someClipCardTitle.text
+            i += 1
+            print "%s: %s" % (i, someClipCardTitle.text)
             assert(self.desktop.clickClipCardTitle(someClipCardTitle.text))
+        self.clipCard = ClipCard(self.driver).wait_until_idle()
+        self.clipCard.close_clipcard()
+
 

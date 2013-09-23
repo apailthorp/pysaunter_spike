@@ -105,3 +105,12 @@ class DesktopPage(Page):
             finally:
                 return True
         return False
+
+    # def getPanelHeight(self):
+    #     return self.driver.execute_script("return $('.panel.sidebar').height()")
+
+    def scrollPanel(self, scrollHeight):
+        script = "var listPage = function(page) { var panel = $('.panel.sidebar'), top = (page - 1) * panel.height(); panel.scrollTop(top); }; listPage(%s);" % scrollHeight
+        print script
+        self.driver.execute_script(script)
+        self.wait_until_idle()

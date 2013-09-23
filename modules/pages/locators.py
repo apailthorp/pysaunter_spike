@@ -14,4 +14,5 @@ locators = {
     'clipcard_titles': 'css=.clipcards .title',
     'reset_search_disabled': 'css=button.reset[style="display: none;"]',
     'reset_search': 'css=button.reset',
+    'clipcard_close': 'css=.control.close',
 }
