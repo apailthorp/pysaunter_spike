@@ -8,6 +8,7 @@ class LoginPage(Page):
 
     def __init__(self, driver):
         self.driver = driver
+        self.driver.set_window_size(1024,800)
         self.config = cfg_wrapper().config
 
     def open(self):

@@ -5,6 +5,8 @@ from saunter.po.webdriver.page import Page
 from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
 from locators import locators
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait # available since 2.4.0
 from selenium.webdriver.support import expected_conditions as EC # available since 2.26.0
 
@@ -20,7 +22,19 @@ class DesktopPage(Page):
         return self
 
     def wait_until_idle(self):
+        # try:
+        #     no_timeout = WebDriverWait(self.driver, 5).until(lambda driver: self.wait_for_available(locators['idle']))
+        # except:
+        #     raise
+        # w = WebDriverWait(self.driver, 30, 0.5, (NoSuchElementException))
+        # w.until(lambda d: d.wait_for_available(locators['idle']))
+
+        # w = WebDriverWait(self.driver, 30)
+        # ec = EC.presence_of_element_located(By.CSS_SELECTOR,locators['idle'])
+        # w.until(EC.presence_of_element_located(By.CSS_SELECTOR,locators['idle']))
+
         self.wait_for_available(locators['idle'])
+        # self.find_element_by_locator(locators['idle'])
         return self
 
     def open_close_gear(self):
@@ -68,6 +82,11 @@ class DesktopPage(Page):
         for testTitle in someClipCardTitles:
             if testTitle.text == someClipCardTitle:
                 someClipCard = testTitle
+                # Sleep necessary due to bug with chrome driver:
+                # http://code.google.com/p/selenium/issues/detail?id=2766
+                # & http://code.google.com/p/chromedriver/issues/detail?id=22
+                # & http://code.google.com/p/chromedriver/issues/detail?id=28
+                time.sleep(1)
                 someClipCard.click()
                 return True
         return False

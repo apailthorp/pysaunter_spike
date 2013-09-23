@@ -2,7 +2,7 @@ __author__ = 'apailthorp'
 
 
 locators = {
-    'idle': 'css=.idle',
+    'idle': 'css=.ng-scope.ready.idle',
     'username': "css=input[name='username']",
     'password': 'css=input[name="password"]',
     'submit': 'css=input[name="submit"]',
