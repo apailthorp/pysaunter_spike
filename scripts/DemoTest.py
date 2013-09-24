@@ -28,51 +28,51 @@ class CheckLoginExample(SaunterTestCase):
         clipCardTitles = self.desktop.getClipCardTitles()
         print 'ClipCard titles count: %s' % len(clipCardTitles)
 
-        # print 'scroll the search results'
-        # self.desktop.scrollPanel(9)
-        #
-        # clipCardTitles = self.desktop.getClipCardTitles()
-        # print 'ClipCard titles count: %s' % len(clipCardTitles)
-        #
-        # print 'scroll the search results'
-        # self.desktop.scrollPanel(9)
-        #
-        # clipCardTitles = self.desktop.getClipCardTitles()
-        # print 'ClipCard titles count: %s' % len(clipCardTitles)
-        #
-        # print 'scroll the search results'
-        # self.desktop.scrollPanel(9)
-        #
-        # clipCardTitles = self.desktop.getClipCardTitles()
-        # print 'ClipCard titles count: %s' % len(clipCardTitles)
-        #
-        # print 'Some ClipCard titles'
-        # clipCardTitles = self.desktop.getClipCardTitles()
-        # i = 0
-        # for someClipCardTitle in clipCardTitles:
-        #     i += 1
-        #     print "%s: %s" % (i, someClipCardTitle.text)
-        #     #assert(self.desktop.clickClipCardTitle(someClipCardTitle.text))
-        #
-        # print 'zoom out as far as we can'
-        # while (self.desktop.zoom_enabled('out')):
-        #     self.desktop.zoom('out')
-        #
-        # print 'assert zoom in available'
-        # assert(self.desktop.zoom_enabled('in'))
-        #
-        # print 'zoom in as far as we can'
-        # while (self.desktop.zoom_enabled('in')):
-        #     self.desktop.zoom('in')
-        #
-        # print 'scroll the search results'
-        # self.desktop.scrollPanel(9)
-        #
-        # print 'assert zoom out available'
-        # assert(self.desktop.zoom_enabled('out'))
-        #
-        # print 'reset the search'
-        # assert(self.desktop.resetSearch())
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
+        clipCardTitles = self.desktop.getClipCardTitles()
+        print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
+        clipCardTitles = self.desktop.getClipCardTitles()
+        print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
+        clipCardTitles = self.desktop.getClipCardTitles()
+        print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+        print 'Some ClipCard titles'
+        clipCardTitles = self.desktop.getClipCardTitles()
+        i = 0
+        for someClipCardTitle in clipCardTitles:
+            i += 1
+            print "%s: %s" % (i, someClipCardTitle.text)
+            #assert(self.desktop.clickClipCardTitle(someClipCardTitle.text))
+
+        print 'zoom out as far as we can'
+        while (self.desktop.zoom_enabled('out')):
+            self.desktop.zoom('out')
+
+        print 'assert zoom in available'
+        assert(self.desktop.zoom_enabled('in'))
+
+        print 'zoom in as far as we can'
+        while (self.desktop.zoom_enabled('in')):
+            self.desktop.zoom('in')
+
+        print 'scroll the search results'
+        self.desktop.scrollPanel(9)
+
+        print 'assert zoom out available'
+        assert(self.desktop.zoom_enabled('out'))
+
+        print 'reset the search'
+        assert(self.desktop.resetSearch())
 
         print 'Some ClipCard titles after search reset'
         clipCardTitles = self.desktop.getClipCardTitles()
@@ -82,6 +82,6 @@ class CheckLoginExample(SaunterTestCase):
             print "%s: %s" % (i, someClipCardTitle.text)
             assert(self.desktop.clickClipCardTitle(someClipCardTitle.text))
             clipCard = ClipCard(self.driver)
-            clipCard.next_face()
-            clipCard.next_face()
+            # clipCard.next_face()
+            # clipCard.next_face()
             clipCard.close_clipcard()
