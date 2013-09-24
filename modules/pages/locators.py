@@ -14,5 +14,9 @@ locators = {
     'clipcard_titles': 'css=.clipcards .title',
     'reset_search_disabled': 'css=button.reset[style="display: none;"]',
     'reset_search': 'css=button.reset',
-    'clipcard_close': 'css=.control.close',
+    'clipcard_close': 'css=.active .control.close',
+    'clipcard_prev': 'css=.active .control.prev[style="display: none;"]',
+    'clipcard_next': 'css=.active .control.next[style="display: none;"]',
+    'clipcard_prev_active': 'css=.active .control.prev[style="display: inline-block;"]',
+    'clipcard_next_active': 'css=.active .control.next[style="display: inline-block;"]',
 }

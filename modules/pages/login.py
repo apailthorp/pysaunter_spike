@@ -1,3 +1,4 @@
+
 __author__ = 'apailthorp'
 
 from saunter.po.webdriver.page import Page
@@ -20,7 +21,7 @@ class LoginPage(Page):
         return self
 
     def login(self, name, pwd):
-        # self.wait_until_loaded()
+        self.wait_until_idle()
         driver = self.driver
         driver.find_element_by_locator(locators['username']).send_keys(name)
         driver.find_element_by_locator(locators['password']).send_keys(pwd)
