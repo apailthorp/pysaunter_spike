@@ -1,27 +1,25 @@
-from modules.pages import locators
-
 __author__ = 'apailthorp'
 
-import time
-from saunter.po.webdriver.page import Page
-from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
-from locators import locators
-from selenium.common.exceptions import NoSuchElementException
+locators = {
+    'idle': 'css=.ng-scope.ready.idle',
+    'gear': 'css=.has-settings .settings-menu .label',
+    'zoom_out': 'css=a.leaflet-control-zoom-out',
+    'zoom_out_disabled': 'css=.leaflet-control-zoom-out.leaflet-control-zoom-disabled',
+    'zoom_in': 'css=a.leaflet-control-zoom-in',
+    'zoom_in_disabled': 'css=a.leaflet-control-zoom-in.leaflet-control-zoom-disabled',
+    'clipcard_titles': 'css=.clipcards .title',
+    'reset_search_disabled': 'css=button.reset[style="display: none;"]',
+    'reset_search': 'css=button.reset',
+}
 
+import time
+from clipcard_app_base_page import ClipCardAppBasePage as Page
+from selenium.common.exceptions import NoSuchElementException
 
 class DesktopPage(Page):
 
     def __init__(self, driver):
-        self.driver = driver
-        self.config = cfg_wrapper().config
-
-    def open(self):
-        self.driver.get(self.config.get('Selenium', 'base_url'))
-        return self
-
-    def wait_until_idle(self):
-        self.wait_for_available(locators['idle'])
-        return self
+        super(DesktopPage, self).__init__(driver)
 
     def open_close_gear(self):
         self.wait_until_idle()

@@ -21,9 +21,15 @@ class CheckLoginExample(SaunterTestCase):
         print 'login page constructed'
         assert(Login.login('g_user', 'testtest'))
 
+        print 'login complete'
+
         self.desktop = DesktopPage(self.driver).wait_until_idle()
 
-        # assert(self.desktop.open_close_gear())
+        print 'desktop ready'
+
+        assert(self.desktop.open_close_gear())
+
+        print 'gear operated'
 
         clipCardTitles = self.desktop.getClipCardTitles()
         print 'ClipCard titles count: %s' % len(clipCardTitles)

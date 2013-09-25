@@ -1,23 +1,24 @@
-
 __author__ = 'apailthorp'
 
-from saunter.po.webdriver.page import Page
+locators = {
+    'idle': 'css=.ng-scope.ready.idle',
+    'username': "css=input[name='username']",
+    'password': 'css=input[name="password"]',
+    'submit': 'css=input[name="submit"]',
+    'gear': 'css=.has-settings .settings-menu .label',
+}
+
+from clipcard_app_base_page import ClipCardAppBasePage as Page
 from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
-from locators import locators
 
 class LoginPage(Page):
 
     def __init__(self, driver):
-        self.driver = driver
+        super(LoginPage, self).__init__(driver)
         self.driver.set_window_size(1024,800)
-        self.config = cfg_wrapper().config
 
     def open(self):
         self.driver.get(self.config.get('Selenium', 'base_url'))
-        return self
-
-    def wait_until_idle(self):
-        self.wait_for_available(locators['idle'])
         return self
 
     def login(self, name, pwd):

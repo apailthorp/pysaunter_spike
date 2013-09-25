@@ -1,19 +1,23 @@
 __author__ = 'apailthorp'
 
-from saunter.po.webdriver.page import Page
+from clipcard_app_base_page import ClipCardAppBasePage as Page
 from selenium.webdriver.common.action_chains import ActionChains
 from saunter.ConfigWrapper import ConfigWrapper as cfg_wrapper
-from locators import locators
+
+locators = {
+    'clipcard_close': 'css=.active .control.close',
+    'clipcard_prev': 'css=.active .control.prev[style="display: none;"]',
+    'clipcard_next': 'css=.active .control.next[style="display: none;"]',
+    'clipcard_prev_active': 'css=.active .control.prev[style="display: inline-block;"]',
+    'clipcard_next_active': 'css=.active .control.next[style="display: inline-block;"]',
+}
+
 
 class ClipCard(Page):
 
-    def __init__(self, driver):
-        self.driver = driver
-        self.config = cfg_wrapper().config
-
-    def wait_until_idle(self):
-        self.wait_for_available(locators['idle'])
-        return self
+    # def __init__(self, driver):
+    #     self.driver = driver
+    #     self.config = cfg_wrapper().config
 
     def close_clipcard(self):
         self.wait_until_idle()
