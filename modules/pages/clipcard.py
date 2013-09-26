@@ -15,9 +15,9 @@ locators = {
 
 class ClipCard(Page):
 
-    # def __init__(self, driver):
-    #     self.driver = driver
-    #     self.config = cfg_wrapper().config
+    def __init__(self, driver):
+        super(ClipCard, self).__init__(driver)
+
 
     def close_clipcard(self):
         self.wait_until_idle()
