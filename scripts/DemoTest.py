@@ -16,78 +16,120 @@ class CheckLoginExample(SaunterTestCase):
 
     @pytest.marks('demo')
     def test_try_stuff(self):
-        print 'logging in'
+
+        users = [
+            #{"name": "a_user",
+            # "password": "test"
+            #},
+            #{"name": "b_user",
+            # "password": "testtest"
+            #},
+            #{"name": "c_user",
+            # "password": "testtest"
+            #},
+            #{"name": "d_user",
+            # "password": "testtest"
+            #},
+            #{"name": "e_user",
+            # "password": "testtest"
+            #},
+            {"name": "f_user",
+            "password": "testtest"
+            },
+            {"name": "g_user",
+             "password": "testtest"
+            },
+            #{"name": "h_user",
+            # "password": "testtest"
+            #},
+            #{"name": "i_user",
+            # "password": "testtest"
+            #},
+            #{"name": "j_user",
+            # "password": "testtest"
+            #},
+            #{"name": "m_user1",
+            # "password": "testtesttest"
+            #},
+        ]
+
         Login = LoginPage(self.driver).open().wait_until_idle()
-        print 'login page constructed'
-        assert(Login.login('q_user', 'testtesttest'))
+        assert(Login.login("g_user", "testtest"))
+        Desktop = DesktopPage(self.driver).wait_until_idle()
+        assert(Desktop.logout())
 
-        print 'login complete'
+        for i in range(1,100):
+            for someUser in users:
+                user = someUser["name"]
+                password = someUser["password"]
+                print 'Iteration: ' + i.__str__() + ' logging in as: ' + user
+                assert(Login.login(user, password))
 
-        self.desktop = DesktopPage(self.driver).wait_until_idle()
+                clipCardTitles = Desktop.getClipCardTitles()
+                print 'ClipCard titles count: %s' % len(clipCardTitles)
 
-        #print 'desktop ready'
-        #
-        #assert(self.desktop.open_close_gear())
-        #
-        #print 'gear operated'
-        #
-        #clipCardTitles = self.desktop.getClipCardTitles()
-        #print 'ClipCard titles count: %s' % len(clipCardTitles)
-        #
-        #print 'scroll the search results'
-        #self.desktop.scrollPanel(9)
-        #
-        #clipCardTitles = self.desktop.getClipCardTitles()
-        #print 'ClipCard titles count: %s' % len(clipCardTitles)
-        #
-        #print 'scroll the search results'
-        #self.desktop.scrollPanel(9)
-        #
-        #clipCardTitles = self.desktop.getClipCardTitles()
-        #print 'ClipCard titles count: %s' % len(clipCardTitles)
-        #
-        #print 'scroll the search results'
-        #self.desktop.scrollPanel(9)
-        #
-        #clipCardTitles = self.desktop.getClipCardTitles()
-        #print 'ClipCard titles count: %s' % len(clipCardTitles)
-        #
-        #print 'Some ClipCard titles'
-        #clipCardTitles = self.desktop.getClipCardTitles()
-        #i = 0
-        #for someClipCardTitle in clipCardTitles:
-        #    i += 1
-        #    print "%s: %s" % (i, someClipCardTitle.text)
-        #    #assert(self.desktop.clickClipCardTitle(someClipCardTitle.text))
-        #
-        #print 'zoom out as far as we can'
-        #while (self.desktop.zoom_enabled('out')):
-        #    self.desktop.zoom('out')
-        #
-        #print 'assert zoom in available'
-        #assert(self.desktop.zoom_enabled('in'))
-        #
-        #print 'zoom in as far as we can'
-        #while (self.desktop.zoom_enabled('in')):
-        #    self.desktop.zoom('in')
-        #
-        #print 'scroll the search results'
-        #self.desktop.scrollPanel(9)
-        #
-        #print 'assert zoom out available'
-        #assert(self.desktop.zoom_enabled('out'))
-        #
-        #print 'reset the search'
-        #assert(self.desktop.resetSearch())
-        #
-        #print 'Some ClipCard titles after search reset'
-        #clipCardTitles = self.desktop.getClipCardTitles()
-        #i = 0
-        #for someClipCardTitle in clipCardTitles:
-        #    i += 1
-        #    print "%s: %s" % (i, someClipCardTitle.text)
-        #    assert(self.desktop.clickClipCardTitle(someClipCardTitle.text))
-        #    clipCard = ClipCard(self.driver)
-        #    # clipCard.next_face()
-        #    # clipCard.next_face()
-        #    clipCard.close_clipcard()
+                print 'scroll the search results'
+                Desktop.scrollPanel(9)
+
+                clipCardTitles = Desktop.getClipCardTitles()
+                print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+                print 'scroll the search results'
+                Desktop.scrollPanel(9)
+
+                clipCardTitles = Desktop.getClipCardTitles()
+                print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+                print 'scroll the search results'
+                Desktop.scrollPanel(9)
+
+                clipCardTitles = Desktop.getClipCardTitles()
+                print 'ClipCard titles count: %s' % len(clipCardTitles)
+
+                #print 'Some ClipCard titles'
+                #clipCardTitles = Desktop.getClipCardTitles()
+                #i = 0
+                #for someClipCardTitle in clipCardTitles:
+                #    i += 1
+                #    print "%s: %s" % (i, someClipCardTitle.text)
+                #    #assert(Desktop.clickClipCardTitle(someClipCardTitle.text))
+
+                print 'zoom out as far as we can'
+                while (Desktop.zoom_enabled('out')):
+                    print 'zoom out'
+                    Desktop.zoom('out')
+
+                print 'assert zoom in available'
+                assert(Desktop.zoom_enabled('in'))
+
+                print 'zoom in as far as we can'
+                while (Desktop.zoom_enabled('in')):
+                    print 'zoom in'
+                    Desktop.zoom('in')
+
+                print 'assert zoom out available'
+                assert(Desktop.zoom_enabled('out'))
+
+                print 'reset the search'
+                assert(Desktop.resetSearch())
+
+                print 'scroll the search results'
+                Desktop.scrollPanel(9)
+
+
+                print 'Some ClipCard titles after search reset'
+                clipCardTitles = Desktop.getClipCardTitles()
+                i = 0
+                for someClipCardTitle in clipCardTitles:
+                    print "%s: %s" % (i, someClipCardTitle.text)
+                    Desktop.scrollPanel(i)
+                    i += 1
+                    assert(Desktop.clickClipCardTitle(someClipCardTitle.text))
+                    clipCard = ClipCard(self.driver)
+                    # clipCard.next_face()
+                    # clipCard.next_face()
+                    clipCard.close_clipcard()
+
+                assert(Desktop.logout())
+                print 'logged out'
+

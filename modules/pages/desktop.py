@@ -1,7 +1,9 @@
 __author__ = 'apailthorp'
 
 locators = {
-    'idle': 'css=.ng-scope.ready.idle',
+    'idle': 'css=.idle',
+    'logout': ".ui.popout.menu.active a.link[href='/account/logout/']",
+    'username': "css=input[name='username']",
     'gear': 'css=.has-settings .settings-menu .label',
     'zoom_out': 'css=a.leaflet-control-zoom-out',
     'zoom_out_disabled': 'css=.leaflet-control-zoom-out.leaflet-control-zoom-disabled',
@@ -15,11 +17,27 @@ locators = {
 import time
 from clipcard_app_base_page import ClipCardAppBasePage as Page
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class DesktopPage(Page):
 
     def __init__(self, driver):
         super(DesktopPage, self).__init__(driver)
+
+    def logout(self):
+        self.wait_until_idle()
+        gear = self.driver.find_element_by_locator(locators['gear'])
+        gear.click()
+        # logout = self.driver.find_element_by_locator(locators['logout'])
+        logout = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,locators['logout'])))
+        logout.click()
+        time.sleep(2)
+        self.wait_until_idle()
+        if not(self.driver.is_element_present(locators['username'])):
+            return False
+        return True
 
     def open_close_gear(self):
         self.wait_until_idle()
@@ -33,6 +51,7 @@ class DesktopPage(Page):
     # Checks and reports state of zoom in or out control
     def zoom_enabled(self, inOrOut):
         self.wait_until_idle()
+        print 'testing zoom ' + inOrOut
         try:
             self.driver.find_element_by_locator(locators['zoom_' + inOrOut])
         except NoSuchElementException:
@@ -47,6 +66,9 @@ class DesktopPage(Page):
     # Attempts operate zoom in or out, returns true if able, false if zoom out disabled
     def zoom(self, inOrOut):
         self.wait_until_idle()
+        time.sleep(1)
+        self.wait_until_idle()
+        print 'clicking zoom '  + inOrOut
         try:
             zoom_control = self.driver.find_element_by_locator(locators['zoom_' + inOrOut])
         except NoSuchElementException:
@@ -70,7 +92,7 @@ class DesktopPage(Page):
                 # http://code.google.com/p/selenium/issues/detail?id=2766
                 # & http://code.google.com/p/chromedriver/issues/detail?id=22
                 # & http://code.google.com/p/chromedriver/issues/detail?id=28
-                time.sleep(1)
+                # time.sleep(1)
                 someClipCard.click()
                 return True
         return False
@@ -95,6 +117,5 @@ class DesktopPage(Page):
 
     def scrollPanel(self, scrollHeight):
         script = "var listPage = function(page) { var panel = $('.panel.sidebar'), top = (page - 1) * panel.height(); panel.scrollTop(top); }; listPage(%s);" % scrollHeight
-        print script
         self.driver.execute_script(script)
         self.wait_until_idle()
