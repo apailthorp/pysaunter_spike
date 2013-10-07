@@ -9,3 +9,4 @@ pytest-xdist==1.8
 requests==1.2.3
 selenium==2.35.0
 wsgiref==0.1.2
+-e git+git@github.com:OneOcean/clipcard-python-sdk.git@8d38fe1e4d4542ce026762a0367624dc402ccf5a#egg=clipcard_client-dev
